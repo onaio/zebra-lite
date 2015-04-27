@@ -1,5 +1,6 @@
 (ns ona.viewer.routes
-  (:require [compojure.core :refer :all]
+  (:require [clj-redis-session.core :refer [redis-store]]
+            [compojure.core :refer :all]
             [compojure.route :as route]
             [ona.viewer.views.accounts :as accounts]
             [ona.viewer.views.datasets :as datasets]
@@ -36,8 +37,7 @@
 
 (defroutes main-routes
   (GET "/"
-       {{:keys [account]} :session
-        params :params}
+       {{:keys [account]} :session}
        (home/home-page account))
   (route/resources "/")
   (route/not-found "Page not found"))
