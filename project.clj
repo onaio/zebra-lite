@@ -28,7 +28,8 @@
                  [clj-time "0.7.0"]
                  [inflections "0.9.7"]
                  [clavatar "0.2.1"]
-                 [com.keminglabs/cljx "0.6.0" :exclusions [org.clojure/clojure]]]
+                 [com.keminglabs/cljx "0.6.0" :exclusions [org.clojure/clojure]]
+                 [clj-redis-session "2.1.0"]]
 
   :plugins [[com.keminglabs/cljx "0.6.0" :exclusions [org.clojure/clojure]]
             [lein-cljsbuild "1.0.5"]

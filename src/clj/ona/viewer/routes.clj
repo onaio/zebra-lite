@@ -35,7 +35,7 @@
                                         dataset-id)))))
 
 (defroutes main-routes
-  #_(GET "/"
+  (GET "/"
        {{:keys [account]} :session
         params :params}
        (home/home-page account))
@@ -85,7 +85,8 @@
 
 (def ona-site-defaults
   (-> site-defaults
-      (assoc-in [:security :anti-forgery] false)))
+      (assoc-in [:security :anti-forgery] false)
+      (assoc-in [:session :store] (redis-store {:pool {} :spec {:host "127.0.0.1" :port 6379}}))))
 
 (def ona-viewer
   (-> (routes app-routes)
