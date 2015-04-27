@@ -1,5 +1,6 @@
 (ns ona.viewer.wrappers
   (:require [clansi.core :as ansi]
+            [clj-redis-session.core :refer [redis-store]]
             [clojure.set :refer [intersection]]
             [environ.core :refer [env]]
             [ona.utils.collections :refer [in?]]
@@ -38,4 +39,5 @@
 
 (def ona-site-defaults
   (-> site-defaults
-      (assoc-in [:security :anti-forgery] false)))
+      (assoc-in [:security :anti-forgery] false)
+      (assoc-in [:session :store] (redis-store {:pool {} :spec {:host "127.0.0.1" :port 6379}}))))

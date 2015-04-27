@@ -1,0 +1,26 @@
+/* for IE <9 */
+i.fa-exclamation-triangle{
+    color:#ff5d00!important;
+    font-size:70px!important;
+    width:100px;
+}
+
+/*specifics*/
+.ie-form label, #outdated{
+    display:block!important; /*shows in <ie8*/
+}
+#outdated a{
+    color:#ff5d00;
+}
+#outdated-message{
+    background:#ffc;
+    border-bottom:1px solid #ff5d00;
+}
+.warnlist{
+    padding-left:18px;
+}
+.warnlist li{
+    list-style:disc;
+    margin-left:0;
+    margin-bottom:7px;
+}

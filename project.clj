@@ -11,6 +11,7 @@
   :dependencies [;; ZEBRA LITE REQUIREMENTS
                  [onaio/milia "0.1.0-SNAPSHOT"]
                  ;[org.clojars.onaio/hatti "0.1.0-SNAPSHOT"]
+                 [org.omcljs/om "0.8.8"]
                  [com.google.guava/guava "16.0"]
                  [compojure "1.3.2"]
                  [org.clojure/clojure "1.6.0"]
@@ -20,6 +21,7 @@
                  [ring.middleware.logger "0.5.0"]
                  [ring/ring-defaults "0.1.4"]
                  [ring/ring-jetty-adapter "1.3.2"]
+                 [sablono "0.3.4"]
                  ;; ring middleware
                  [ring/ring-json "0.3.1"]
                  [hiccup "1.0.5"]
@@ -29,7 +31,8 @@
                  [inflections "0.9.7"]
                  [clavatar "0.2.1"]
                  [com.keminglabs/cljx "0.6.0" :exclusions [org.clojure/clojure]]
-                 [environ "1.0.0"]]
+                 [environ "1.0.0"]
+                 [clj-redis-session "2.1.0"]]
 
   :plugins [[com.keminglabs/cljx "0.6.0" :exclusions [org.clojure/clojure]]
             [lein-cljsbuild "1.0.5"]

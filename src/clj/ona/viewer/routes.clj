@@ -37,9 +37,8 @@
                                         dataset-id)))))
 
 (defroutes main-routes
-  #_(GET "/"
-       {{:keys [account]} :session
-        params :params}
+  (GET "/"
+       {{:keys [account]} :session}
        (home/home-page account))
   (route/resources "/")
   (route/not-found "Page not found"))
