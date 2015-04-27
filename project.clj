@@ -10,7 +10,7 @@
             :url "http://www.apache.org/licenses/LICENSE-2.0"}
   :dependencies [;; ZEBRA LITE REQUIREMENTS
                  [onaio/milia "0.1.0-SNAPSHOT"]
-                 [org.clojars.onaio/hatti "0.1.0-SNAPSHOT"]
+                 ;[org.clojars.onaio/hatti "0.1.0-SNAPSHOT"]
                  [com.google.guava/guava "16.0"]
                  [compojure "1.3.2"]
                  [org.clojure/clojure "1.6.0"]
@@ -28,7 +28,8 @@
                  [clj-time "0.7.0"]
                  [inflections "0.9.7"]
                  [clavatar "0.2.1"]
-                 [com.keminglabs/cljx "0.6.0" :exclusions [org.clojure/clojure]]]
+                 [com.keminglabs/cljx "0.6.0" :exclusions [org.clojure/clojure]]
+                 [environ "1.0.0"]]
 
   :plugins [[com.keminglabs/cljx "0.6.0" :exclusions [org.clojure/clojure]]
             [lein-cljsbuild "1.0.5"]
@@ -44,7 +45,7 @@
                          :debug false
                          :jetty-min-threads 10
                          :jetty-max-threads 80
-                         :std-out "/dev/stdout"
+                         :stdout "/dev/stdout"
                          :file "/var/log/ona-viewer/current"}}
              :uberjar {:env {:debug-api? false
                              :jetty-min-threads 10
