@@ -1,10 +1,12 @@
 (ns ona.viewer.views.datasets
-  (:require [hiccup.page :refer [html5]]))
+  (:require [hiccup.page :refer [html5]]
+            [ona.utils.shared-dom :refer [loading-spinner]]
+            [ona.viewer.helpers.tags :as tags]
+            [ona.viewer.views.template :as template]))
 
 (defn datasets
+  "Renders the page with forms"
   [account]
-  (html5
-    [:head
-     [:title "Home"]]
-    [:body
-     [:h1 (str "Welcome! "  (:username account)". We'll load your forms here.")]]))
+  (template/base "Home"
+                 (loading-spinner {:class "fullpage-spinner"} "Loading Forms...")
+                 (tags/js-tag "ona.datasets.init()")))

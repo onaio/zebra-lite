@@ -4,7 +4,7 @@
             [ona.viewer.views.template :as template]))
 
 
-(defn login-page
+(defn login
   "Renders the login page"
   []
   (template/base "Login"
