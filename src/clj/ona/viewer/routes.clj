@@ -10,9 +10,7 @@
             [slingshot.slingshot :refer [throw+ try+]]))
 
 (defroutes site-routes
-  (GET "/about"
-       {{:keys [account]} :session}
-       (home/about-page account)))
+  (GET "/about" [] (home/about-page)))
 
 #_(defroutes user-routes
   (GET "/login" {session :session flash :flash} (accounts/login session flash))

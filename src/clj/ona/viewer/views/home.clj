@@ -3,8 +3,12 @@
 
 (defn about-page
   "Render the about page"
-  [account]
-  )
+  []
+  (html5
+    [:head
+     [:title "About Us"]]
+    [:body
+     [:h1 "This is a lite Zebra"]]))
 
 #_(defn index-page []
   (html5

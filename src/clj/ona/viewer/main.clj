@@ -8,19 +8,19 @@
 
 (def app
   (do
-    (log/start! (:stdout (env :std-out)))
+    (log/start! "/dev/stdout")
     routes/ona-viewer))
 
 (def app-production
   (do
-    (log/start! (:file (env :file)))
+    (log/start! "/var/log/ona-viewer/current")
     routes/ona-viewer))
 
 (defn start [port]
   (ring/run-jetty app-production {:port port
                                   :join? false
-                                  :min-threads (env :jetty-min-threads)
-                                  :max-threads (env :jetty-max-threads)}))
+                                  :min-threads 10
+                                  :max-threads 80}))
 
 (defn -main []
   (let [port (Integer. (or (System/getenv "PORT") "8080"))]
