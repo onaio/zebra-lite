@@ -1,5 +1,5 @@
 (ns ona.viewer.views.accounts
-  (:require [hiccup.page :refer [html5]]
+  (:require [ona.utils.shared-dom :refer [loading-spinner]]
             [ona.viewer.helpers.tags :as tags]
             [ona.viewer.views.template :as template]))
 
@@ -8,5 +8,5 @@
   "Renders the login page"
   []
   (template/base "Login"
-                 "This is the login page"
+                 (loading-spinner {:class "fullpage-spinner"} "Loading Zebra...")
                  (tags/js-tag "ona.login.init()")))
