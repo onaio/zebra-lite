@@ -19,6 +19,8 @@
    (for [style-sheet style-sheets]
      [:link {:rel "stylesheet" :type "text/css" :href style-sheet}])]
   [:body
-   [:content {:class "wrapper cfix"} content]
+   [:content {:class "wrapper cfix"}
+    [:div {:id "app"}
+     content]]
    (tags/include-js "lib/main.js")
    js]))
