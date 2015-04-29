@@ -1,6 +1,6 @@
 (ns ona.viewer.views.accounts
   (:require [ona.utils.shared-dom :refer [loading-spinner]]
-            [ona.viewer.helpers.tags :as tags]
+            [ona.utils.tags :as tags]
             [ona.viewer.views.template :as template]))
 
 

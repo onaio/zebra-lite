@@ -1,6 +1,6 @@
 (ns ona.viewer.views.template
   (:require [hiccup.page :refer [html5]]
-            [ona.viewer.helpers.tags :as tags]))
+            [ona.utils.tags :as tags]))
 
 (def style-sheets
   (map #(str "/css/" %)
