@@ -12,7 +12,7 @@
             [ring.middleware.logger :refer [wrap-with-logger]]
             [slingshot.slingshot :refer [throw+ try+]]))
 
-#_(defroutes user-routes
+(defroutes user-routes
   (GET "/login" {session :session flash :flash} (accounts/login session flash))
   (POST "/login"
         {{:keys [username password]} :params}
@@ -41,7 +41,7 @@
   (route/not-found "Page not found"))
 
 (defroutes app-routes
-  ; user-routes
+  user-routes
   ; dataset-routes
   main-routes)
 

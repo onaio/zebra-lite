@@ -2,6 +2,7 @@
  (:require-macros [cljs.core.async.macros :refer [go go-loop]]
                   [dommy.macros :refer [sel sel1]])
  (:require [cljs.core.async :refer [<! chan mult tap put!]]
+           [cljs.reader :refer [read-string]]
            [om.core :as om :include-macros true]
            [ona.utils.dom :refer [click-fn]]
            [ona.utils.tags :refer [image]]
@@ -79,14 +80,17 @@
                  [:label "Password"]
                  [:input {:type "password" :name "password" :placeholder "Password"}]]
                 [:p
-                 [:input {:type "submit" :value "Sign In" :class "pure-button btn-warning btn-large"
-                          :on-click (click-fn
-                                      #(secretary/dispatch! "/login"))}]]
+                 [:input {:type "submit" :value "Sign In" :class "pure-button btn-warning btn-large"}]]
                 [:p
                  "Don't have an account?" [:a {:href"/join" :class"link-red"} " Sign up"]]
                 [:p
                  "Forgot your password?" [:a {:href "#" :class"link-red"} " Click here to reset it"]]]]]])  )))
 
-(defn ^:export init []
+(defn ^:export init [status-messages]
+
+  (when (not= status-messages "null")
+    (swap! app-state conj (read-string status-messages))
+    (.log js/console (read-string status-messages)))
+
   (om/root login app-state
            {:target (sel1 :#app)}))

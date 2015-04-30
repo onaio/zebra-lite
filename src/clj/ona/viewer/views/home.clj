@@ -8,4 +8,4 @@
   [account]
   (if (:username account)
     (datasets/datasets account)
-    (accounts/login)))
+    (accounts/login account nil)))
