@@ -22,6 +22,7 @@
                  [ring/ring-defaults "0.1.4"]
                  [ring/ring-jetty-adapter "1.3.2"]
                  [sablono "0.3.4"]
+                 [secretary "1.2.3"]
                  ;; ring middleware
                  [ring/ring-json "0.3.1"]
                  [hiccup "1.0.5"]

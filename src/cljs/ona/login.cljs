@@ -3,8 +3,10 @@
                   [dommy.macros :refer [sel sel1]])
  (:require [cljs.core.async :refer [<! chan mult tap put!]]
            [om.core :as om :include-macros true]
+           [ona.utils.dom :refer [click-fn]]
            [ona.utils.tags :refer [image]]
-           [sablono.core :refer-macros [html]]))
+           [sablono.core :refer-macros [html]]
+           [secretary.core :as secretary]))
 
 (def app-state (atom {}))
 
@@ -25,7 +27,7 @@
             [:li
              [:div {:class "dropdown projects-drop drop-hover"}
               [:a {:href "#"}
-               [:span {:data-i18n-key "main-navigation/organizations-dropdown-header"} "Organizations"
+               [:span {:data-i18n-key "main-navigation/organizations-dropdown-header"} "Organizations "
                 [:i {:class "fa fa-angle-down"}]]]
               [:ul {:id "orgs-dropdown" :class "submenu"}
                [:li [:div {:class "drop-search orgs-search"}
@@ -36,7 +38,7 @@
             [:li {:id "projects"}
              [:div {:class "dropdown projects-drop drop-hover"}
               [:a {:href "#"}
-               [:span {:data-i18n-key "main-navigation/main-navigation/projects-dropdown-header"} "Projects"
+               [:span {:data-i18n-key "main-navigation/main-navigation/projects-dropdown-header"} "Projects "
                 [:i {:class "fa fa-angle-down"}]]]
               [:ul {:id "project-dropdown" :class "submenu"}
                [:li [:div {:class "drop-search orgs-search"}
@@ -48,7 +50,7 @@
            [:ul {:id "user" :class "right"}
             [:li {:class "header-user"} [:span {:class "bell-wrap"} [:i {:class "fa fa-bell-o"}]]
              [:div {:class "dropdown drop-hover"}
-              [:a {:id "user-avatar" :href "#"} [:span {:class "label label-initial pink"} "G"]
+              [:a {:id "user-avatar" :href "#"} [:span {:class "label label-initial pink"} "G "]
                [:i {:class "fa fa-angle-down"}]]
               [:ul {:class "submenu" :id "user-dropdown"}
                [:li [:a {:href "#"} "username"]]
@@ -77,11 +79,13 @@
                  [:label "Password"]
                  [:input {:type "password" :name "password" :placeholder "Password"}]]
                 [:p
-                 [:input {:type "submit" :value "Sign In" :class "pure-button btn-warning btn-large"}]]
+                 [:input {:type "submit" :value "Sign In" :class "pure-button btn-warning btn-large"
+                          :on-click (click-fn
+                                      #(secretary/dispatch! "/login"))}]]
                 [:p
                  "Don't have an account?" [:a {:href"/join" :class"link-red"} " Sign up"]]
                 [:p
-                 "Forgot your password?" [:a {:href "#" :class"link-red"} " Click here to reset it"]]]]]]))))
+                 "Forgot your password?" [:a {:href "#" :class"link-red"} " Click here to reset it"]]]]]])  )))
 
 (defn ^:export init []
   (om/root login app-state
