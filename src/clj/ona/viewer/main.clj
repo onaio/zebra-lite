@@ -2,17 +2,22 @@
   (:require [ona.viewer.routes :as routes]
             [environ.core :refer [env]]
             [onelog.core :as log]
+            [ona.utils.remote :refer [hosts]]
             [ring.adapter.jetty :as ring])
   (:gen-class))
 
 
 (def app
   (do
+    (swap! hosts assoc :data (env :ona-api-server-host))
+    (swap! hosts assoc :ona-api-server-protocol (env :ona-api-server-protocol))
     (log/start! (env :stdout))
     routes/ona-viewer))
 
 (def app-production
   (do
+    (swap! hosts assoc :data (env :ona-api-server-host))
+    (swap! hosts assoc :ona-api-server-protocol (env :ona-api-server-protocol))
     (log/start! (env :file))
     routes/ona-viewer))
 

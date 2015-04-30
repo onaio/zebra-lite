@@ -12,14 +12,20 @@
             [ring.middleware.logger :refer [wrap-with-logger]]
             [slingshot.slingshot :refer [throw+ try+]]))
 
+(defroutes site-routes
+  (GET "/about" [] (home/about-page)))
+
 (defroutes user-routes
   (GET "/login" {session :session flash :flash} (accounts/login session flash))
-  (POST "/login"
-        {{:keys [username password]} :params}
-        (accounts/submit-login username password))
-  (GET "/logout"
-       {{:keys [account]} :session}
-       (accounts/logout account)))
+  (POST "/login" {{:keys [username password]} :params} (accounts/submit-login username password))
+  (GET "/logout" {{:keys [account]} :session} (accounts/logout account))
+  (context "/:owner" [owner]
+    (GET "/temp-token"
+         {{:keys [account]} :session}
+      (accounts/get-token account owner))
+    (GET "/validate-token"
+         {{:keys [account]} :session}
+         (accounts/validate-token account owner))))
 
 #_(defroutes dataset-routes
   (context "/:owner" [owner]
@@ -41,6 +47,7 @@
   (route/not-found "Page not found"))
 
 (defroutes app-routes
+  site-routes
   user-routes
   ; dataset-routes
   main-routes)
