@@ -33,7 +33,9 @@
                  [clavatar "0.2.1"]
                  [com.keminglabs/cljx "0.6.0" :exclusions [org.clojure/clojure]]
                  [environ "1.0.0"]
-                 [clj-redis-session "2.1.0"]]
+                 [clj-redis-session "2.1.0"]
+                 ;; CLSJS Dependencies
+                 [cljsjs/moment "2.9.0-0"]]
 
   :plugins [[com.keminglabs/cljx "0.6.0" :exclusions [org.clojure/clojure]]
             [lein-cljsbuild "1.0.5"]
