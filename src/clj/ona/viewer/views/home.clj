@@ -7,5 +7,5 @@
   "Render the home page"
   [account]
   (if (:username account)
-    (datasets/datasets account)
+    (datasets/list-datasets account)
     (accounts/login account nil)))
