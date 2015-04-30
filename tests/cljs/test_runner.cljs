@@ -1,6 +1,7 @@
 (ns test-runner
   (:require
-   [cljs.test :as test :refer-macros [run-tests] :refer [report]]))
+   [cljs.test :as test :refer-macros [run-tests] :refer [report]]
+   [ona.dataset-tests]))
 
 
 (enable-console-print!)
@@ -14,6 +15,7 @@
 (defn runner []
   (if (cljs.test/successful?
        (run-tests
-        (test/empty-env ::test/default)))
+        (test/empty-env ::test/default)
+        'ona.dataset-tests))
     0
     1))
