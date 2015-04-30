@@ -47,13 +47,17 @@
   :profiles {:dev {:dependencies [[midje "1.6.3"]]
                    :env {:debug-api? false
                          :debug false
+                         :ona-api-server-host "stage.ona.io"
+                         :ona-api-server-protocol "https"
                          :jetty-min-threads 10
                          :jetty-max-threads 80
                          :stdout "/dev/stdout"
                          :file "/var/log/ona-viewer/current"}}
              :uberjar {:env {:debug-api? false
                              :jetty-min-threads 10
-                             :jetty-max-threads 80}
+                             :jetty-max-threads 80
+                             :ona-api-server-host "ona.io"
+                             :ona-api-server-protocol "https"}
                        :aot :all}}
 
   :prep-tasks [["cljx" "once"] "javac" "compile"]
