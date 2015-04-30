@@ -29,10 +29,6 @@
 
 #_(defroutes dataset-routes
   (context "/:owner" [owner]
-           (GET "/forms"
-                {{:keys [account]} :session
-                 {xhr? :xhr} :params}
-                (datasets/list account owner project-id xhr?))
            (context "/:dataset-id" [dataset-id]
                     (GET "/"
                          {{:keys [account]} :session}
