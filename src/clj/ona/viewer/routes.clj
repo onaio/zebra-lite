@@ -23,15 +23,12 @@
     (GET "/validate-token"
          {{:keys [account]} :session}
          (accounts/validate-token account owner))))
-
-#_(defroutes dataset-routes
-  (context "/:owner" [owner]
-           (context "/:dataset-id" [dataset-id]
+  (defroutes dataset-routes
+             (context "/:dataset-id" [dataset-id]
                     (GET "/"
                          {{:keys [account]} :session}
-                         (datasets/show account
-                                        owner
-                                        dataset-id)))))
+                         (datasets/dataview account
+                                            dataset-id))))
 
 (defroutes main-routes
   (GET "/" {{:keys [account]} :session} (home/dashboard account))

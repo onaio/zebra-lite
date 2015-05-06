@@ -14,3 +14,12 @@
                  (tags/js-tag (format
                                 "ona.dataset.init(\"%s\", \"%s\");"
                                 (:username account) (:temp_token account)))))
+
+(defn dataview
+  [account dataset-id]
+  (template/base "Home"
+                 [:div {:id "content"}
+                  [:div {:id "dataset-view"}
+                   (loading-spinner {:class "fullpage-spinner"} "Loading Forms...")]]
+                 (tags/js-tag (format "ona.dataview.base.init(\"%s\",\"%s\",\"%s\",\"%s\",\"%s\", \"%s\");\n"
+                                      dataset-id (:username account) (:temp_token account)))))
