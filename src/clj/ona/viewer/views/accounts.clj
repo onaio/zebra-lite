@@ -4,7 +4,6 @@
             [ona.utils.tags :as tags]
             [ona.viewer.helpers.accounts :refer [build-session get-account-credentials]]
             [ona.api.user :as user-api]
-            [ona.viewer.helpers.tags :as tags]
             [ona.viewer.views.template :as template]
             [ring.util.response :as response]))
 

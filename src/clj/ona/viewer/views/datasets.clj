@@ -1,7 +1,7 @@
 (ns ona.viewer.views.datasets
   (:require [hiccup.page :refer [html5 include-js]]
             [ona.utils.shared-dom :refer [loading-spinner]]
-            [ona.viewer.helpers.tags :as tags]
+            [ona.utils.tags :as tags]
             [ona.viewer.views.template :as template]))
 
 (defn list-datasets
