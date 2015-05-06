@@ -3,10 +3,18 @@
             [goog.string.format]
             [goog.string]))
 
+(defn console-log [s]
+  "calls console.log after converting a cljs object to js."
+  (.log js/console (clj->js s)))
+
 (defn format
   "Formats a string using goog.string.format, so we can use format in cljx."
   [fmt & args]
   (apply goog.string/format fmt args))
+
+(defn redirect-to-url! [url]
+  "Re-directs the page to the given url."
+  (set! (.-location js/window) url))
 
 (defn safe-regex [s & {:keys [:ignore-case?]
                        :or    {:ignore-case? true}}]
