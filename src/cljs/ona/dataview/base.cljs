@@ -17,7 +17,6 @@
             [ona.utils.interop :refer [json->cljs format console-log]]
             [ona.utils.numeric :refer [pluralize-number]]
             [ona.utils.shared-dom :as shared-dom]
-            [ona.utils.walkthrough :as walkthrough-utils]
             ;; Hatti views; need to also include all namespaces where methods are defined
             [hatti.views :refer [tabbed-dataview dataview-actions]]
             [hatti.views.dataview]
@@ -187,5 +186,4 @@
                                        (fn [_] form-desc))
      (init-views hatti-shared/app-state delete-record! role chart-get shared-state)
      (post-process/integrate-attachments! hatti-shared/app-state form)
-     (walkthrough-utils/launch-data-view-walkthrough auth-token)
      (download-and-process-osm-data! auth-token dataset-id form))))
