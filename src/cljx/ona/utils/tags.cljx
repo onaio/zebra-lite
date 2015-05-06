@@ -1,4 +1,4 @@
-(ns ona.viewer.helpers.tags)
+(ns ona.utils.tags)
 
 (defn image
   "Return a path to a local image."

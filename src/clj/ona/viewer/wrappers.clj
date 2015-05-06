@@ -3,8 +3,7 @@
             [clj-redis-session.core :refer [redis-store]]
             [clojure.set :refer [intersection]]
             [environ.core :refer [env]]
-            [ona.utils.collections :refer [in?]]
-            [ona.viewer.views.defaults :as defaults]
+            [ona.utils.seq :refer [in?]]
             [ring.middleware.defaults :refer [site-defaults]]))
 
 (def redactables

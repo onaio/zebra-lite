@@ -4,6 +4,7 @@
             [compojure.route :as route]
             [ona.viewer.views.accounts :as accounts]
             [ona.viewer.views.datasets :as datasets]
+            [ona.viewer.views.defaults :as defaults]
             [ona.viewer.views.home :as home]
             [ona.viewer.wrappers :as wrappers]
             [ring.middleware.defaults :refer [site-defaults wrap-defaults]]
@@ -11,10 +12,7 @@
             [ring.middleware.logger :refer [wrap-with-logger]]
             [slingshot.slingshot :refer [throw+ try+]]))
 
-(defroutes site-routes
-  (GET "/about" [] (home/about-page)))
-
-#_(defroutes user-routes
+(defroutes user-routes
   (GET "/login" {session :session flash :flash} (accounts/login session flash))
   (POST "/login"
         {{:keys [username password]} :params}
@@ -37,15 +35,13 @@
                                         dataset-id)))))
 
 (defroutes main-routes
-  (GET "/"
-       {{:keys [account]} :session}
-       (home/home-page account))
+  (GET "/" {{:keys [account]} :session} (home/dashboard account))
+  (GET "/about" [] (defaults/about-page))
   (route/resources "/")
   (route/not-found "Page not found"))
 
 (defroutes app-routes
-  site-routes
-  ; user-routes
+  user-routes
   ; dataset-routes
   main-routes)
 
