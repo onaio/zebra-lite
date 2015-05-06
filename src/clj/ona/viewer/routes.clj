@@ -14,19 +14,18 @@
 
 (defroutes user-routes
   (GET "/login" {session :session flash :flash} (accounts/login session flash))
-  (POST "/login"
-        {{:keys [username password]} :params}
-        (accounts/submit-login username password))
-  (GET "/logout"
-       {{:keys [account]} :session}
-       (accounts/logout account)))
+  (POST "/login" {{:keys [username password]} :params} (accounts/submit-login username password))
+  (GET "/logout" {{:keys [account]} :session} (accounts/logout account))
+  (context "/:owner" [owner]
+    (GET "/temp-token"
+         {{:keys [account]} :session}
+      (accounts/get-token account owner))
+    (GET "/validate-token"
+         {{:keys [account]} :session}
+         (accounts/validate-token account owner))))
 
 #_(defroutes dataset-routes
   (context "/:owner" [owner]
-           (GET "/forms"
-                {{:keys [account]} :session
-                 {xhr? :xhr} :params}
-                (datasets/list account owner project-id xhr?))
            (context "/:dataset-id" [dataset-id]
                     (GET "/"
                          {{:keys [account]} :session}
