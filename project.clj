@@ -10,7 +10,7 @@
             :url "http://www.apache.org/licenses/LICENSE-2.0"}
   :dependencies [;; ZEBRA LITE REQUIREMENTS
                  [onaio/milia "0.1.0-SNAPSHOT"]
-                 ;[org.clojars.onaio/hatti "0.1.0-SNAPSHOT"]
+                 [org.clojars.onaio/hatti "0.1.0-SNAPSHOT"]
                  [org.omcljs/om "0.8.8"]
                  [com.google.guava/guava "16.0"]
                  [compojure "1.3.2"]
