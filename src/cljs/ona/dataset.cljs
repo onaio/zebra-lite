@@ -8,6 +8,7 @@
             [ona.api.io :as io]
             [ona.api.http :refer [parse-http]]
             [ona.state :refer [update-form-state! forms-state]]
+            [ona.utils.common-om-components :refer [main-menu]]
             [ona.utils.dom :refer [click-fn]]
             [ona.utils.interop :refer [safe-regex]]
             [ona.utils.numeric :as n]
@@ -15,6 +16,7 @@
 
 (enable-console-print!)
 
+(def menu "main-menu")
 (def dataset-container "dataset-container")
 
 (def sorters
@@ -189,6 +191,9 @@
 
 
 (defn ^:export init [username auth-token]
+  (om/root main-menu {:username username}
+           {:target (. js/document (getElementById menu))})
+
   (go (let [valid-token (<! (io/validate-token auth-token username))
             forms-url (io/make-url "forms.json")
             ;; Find out why the login pop comes up

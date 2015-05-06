@@ -8,6 +8,7 @@
   [account]
   (template/base "Home"
                  [:div {:id "content"}
+                  [:div {:id "main-menu"}]
                    [:div {:id "dataset-container"}
                     (loading-spinner {:class "fullpage-spinner"} "Loading Forms...")]]
                  (tags/js-tag (format
