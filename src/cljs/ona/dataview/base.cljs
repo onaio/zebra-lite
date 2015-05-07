@@ -155,7 +155,7 @@
            osm-xml (:body (<! osm-xml-chan))]
        (post-process/integrate-osm-data! hatti-shared/app-state form osm-xml)))))
 
-(defn ^:export init [dataset-id username auth-token]
+(defn ^:export init [dataset-id username auth-token role]
   "This function is called directly in the html of the data page;
    it downloads data+form, and wires up the table-page and map-page components."
   (go
