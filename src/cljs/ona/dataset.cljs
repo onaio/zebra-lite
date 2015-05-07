@@ -133,7 +133,7 @@
                     num_of_submissions last_submission_time date_created]} form
             created_on (.format (js/moment date_created) "MMM DD, YYYY")
             ago-str (str "last " (.fromNow (js/moment last_submission_time)))
-            form-url (io/make-url "forms" formid)]
+            form-url (io/make-zebra-url "forms" formid)]
         (html [:tr
                [:td
                 [:a {:class "dataset-url" :href form-url}

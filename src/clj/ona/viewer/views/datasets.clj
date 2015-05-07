@@ -20,6 +20,6 @@
   (template/base "Home"
                  [:div {:id "content"}
                   [:div {:id "dataset-view"}
-                   (loading-spinner {:class "fullpage-spinner"} "Loading Forms...")]]
-                 (tags/js-tag (format "ona.dataview.base.init(\"%s\",\"%s\",\"%s\",\"%s\",\"%s\", \"%s\");\n"
-                                      dataset-id (:username account) (:temp_token account)))))
+                   (loading-spinner {:class "fullpage-spinner"} "Loading Data...")]]
+                 (tags/js-tag (format "ona.dataview.base.init(\"%s\",\"%s\",\"%s\");\n"
+                                      dataset-id (:username account) (:temp_token account) "owner"))))
