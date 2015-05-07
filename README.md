@@ -15,4 +15,4 @@ This is a light version of Zebra enabling users to access their forms and submis
 
 ## License
 
-Hatti is released under the [Apache 2.0 License](http://opensource.org/licenses/Apache-2.0).
+zebra-lite is copyright 2015 Ona Systems Inc. and is released under the [AGPL License](https://www.gnu.org/licenses/agpl-3.0.html).
