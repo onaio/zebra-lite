@@ -1,3 +1,11 @@
+(def js-preamble
+  ["META-INF/resources/webjars/SlickGrid/2.1/lib/jquery-1.7.min.js"
+   "META-INF/resources/webjars/SlickGrid/2.1/lib/jquery.event.drag-2.2.js"
+   "META-INF/resources/webjars/SlickGrid/2.1/slick.core.js"
+   "META-INF/resources/webjars/SlickGrid/2.1/slick.grid.js"
+   "META-INF/resources/webjars/SlickGrid/2.1/controls/slick.pager.js"
+   "META-INF/resources/webjars/SlickGrid/2.1/slick.dataview.js"])
+
 (defn js-dir
   "Prefix with full JavaScript directory."
   [path]
@@ -26,6 +34,7 @@
                  [org.clojure/core.async "0.1.346.0-17112a-alpha"]
                  [org.clojure/tools.logging "0.2.6"]
                  [org.omcljs/om "0.8.8"]
+                 [org.webjars/SlickGrid "2.1"]
                  [prabhasp/osmtogeojson-cljs "2.2.5-SNAPSHOT"]
                  [rm-hull/ring-gzip-middleware "0.1.7"]
                  [ring.middleware.logger "0.5.0"]
@@ -73,6 +82,7 @@
                         :compiler {:output-to ~(js-dir "lib/main.js")
                                    :output-dir ~(js-dir "lib/out")
                                    :optimizations :whitespace
+                                   :preamble ~js-preamble
                                    :pretty-print true
                                    :source-map ~(js-dir "lib/main.js.map")}}
                        :test
@@ -85,6 +95,7 @@
                                          "target/main-test.js"]
                         :compiler {:output-to "target/main-test.js"
                                    :optimizations :whitespace
+                                   :preamble ~js-preamble
                                    :pretty-print true}}
                        :prod
                        {:source-paths ["src/cljs"
@@ -92,6 +103,7 @@
                         :compiler {:output-to ~(js-dir "lib/main.js")
                                    :output-dir ~(js-dir "lib/out-prod")
                                    :optimizations :advanced
+                                   :preamble ~js-preamble
                                    :pretty-print false}
                         :jar true}}
               :test-commands {"unit-test"
