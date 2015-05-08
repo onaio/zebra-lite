@@ -177,7 +177,7 @@
                        :username username
                        :auth-token auth-token
                        :map-config {:mapbox-tiles ona-mapbox-tiles
-                                    :include-google-maps? true}
+                                    :include-google-maps? false}
                        :flat-form form
                        :view-type :ona-zebra}]
      (hatti-shared/update-app-data! hatti-shared/app-state data :rerank? true)
