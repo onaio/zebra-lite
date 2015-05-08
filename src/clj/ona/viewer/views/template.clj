@@ -9,10 +9,12 @@
         "pure-min.css"
         "style.css"
         "font-awesome.min.css"
-        "proxima-nova.css"]))
+        "proxima-nova.css"
+        "slick.grid.css"
+        "slick-default-theme.css"]))
 
 (defn base
-  [title content js]
+  [title content & js]
   (html5
   [:head
    [:title title]
@@ -23,4 +25,4 @@
     [:div {:id "app"}
      content]]
    (tags/include-js "lib/main.js")
-   js]))
+   (for [script js] script)]))

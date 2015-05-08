@@ -1,0 +1,40 @@
+@import url('charts-common.css');
+
+/* The following is duplicated from style.css,
+   and scoped further into .chart-holder so it doesn't bleed out into
+   the rest of the page. */
+.chart-holder .t-red { color: #ff5d00 !important; }
+.chart-holder .t-grey{ color:#AFAFAF; }
+.chart-holder .t-left { text-align: left; }
+.chart-holder .t-center { text-align: center; }
+.chart-holder .t-right { text-align: right; }
+.chart-holder .t-normal { font-weight: normal !important; }
+.chart-holder .t-bold { font-weight: bold !important; }
+.chart-holder .t-italics { font-style: italic !important; }
+.chart-holder .t-large { font-size: 2em; }
+.chart-holder .t-medium { font-size: 1.4em; }
+.chart-holder {
+  /* From style.css .chart-holder */
+    background:#ffffff;
+    border:1px solid #dddddd;
+    border-radius:4px;
+    box-shadow:0px 1px 4px 0px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow:0px 1px 4px 0px rgba(0, 0, 0, 0.3);
+    -moz-box-shadow:0px 1px 4px 0px rgba(0, 0, 0, 0.3);
+    margin-bottom:1.2em;
+    margin-top:0.6em;
+    min-height:10em;
+    padding:0.6em 1em 1em;
+  /* From style.css .body */
+    color: #4c4c4c;
+    font-size: 14px !important;
+    font-weight: 300;
+    height: auto !important;
+    position: relative;
+    font-family: 'proxima-nova',sans-serif !important;
+}
+.chart-holder h3 {
+  /* From style.css .chart-holder h3 */
+    color:#888;
+    margin-top:0.3em;
+}
