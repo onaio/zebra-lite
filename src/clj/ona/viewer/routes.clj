@@ -17,21 +17,18 @@
   (POST "/login" {{:keys [username password]} :params} (accounts/submit-login username password))
   (GET "/logout" {{:keys [account]} :session} (accounts/logout account))
   (context "/:owner" [owner]
-    (GET "/temp-token"
-         {{:keys [account]} :session}
-      (accounts/get-token account owner))
-    (GET "/validate-token"
-         {{:keys [account]} :session}
-         (accounts/validate-token account owner))))
+           (GET "/temp-token"
+                {{:keys [account]} :session}
+                (accounts/get-token account owner))
+           (GET "/validate-token"
+                {{:keys [account]} :session}
+                (accounts/validate-token account owner))))
 
-#_(defroutes dataset-routes
-  (context "/:owner" [owner]
-           (context "/:dataset-id" [dataset-id]
-                    (GET "/"
-                         {{:keys [account]} :session}
-                         (datasets/show account
-                                        owner
-                                        dataset-id)))))
+(defroutes dataset-routes
+  (GET "/forms/:dataset-id"
+       {{:keys [account]} :session
+        {:keys [dataset-id]} :params}
+       (datasets/dataview account dataset-id)))
 
 (defroutes main-routes
   (GET "/" {{:keys [account]} :session} (home/dashboard account))
@@ -41,7 +38,7 @@
 
 (defroutes app-routes
   user-routes
-  ; dataset-routes
+  dataset-routes
   main-routes)
 
 (def ona-viewer
