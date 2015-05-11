@@ -28,7 +28,7 @@
   (GET "/forms/:dataset-id"
        {{:keys [account]} :session
         {:keys [dataset-id]} :params}
-       (datasets/dataview account dataset-id)))
+       (datasets/show account dataset-id)))
 
 (defroutes main-routes
   (GET "/" {{:keys [account]} :session} (home/dashboard account))

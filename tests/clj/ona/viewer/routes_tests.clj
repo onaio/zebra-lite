@@ -63,4 +63,4 @@
                                            (str "/forms/" dataset-id)
                                            session)) => (contains result)
              (provided
-               (datasets/dataview :fake-account dataset-id) => result)))
+               (datasets/show :fake-account dataset-id) => result)))

@@ -4,7 +4,7 @@
             [ona.utils.tags :as tags]
             [ona.viewer.views.template :as template]))
 
-(defn list-datasets
+(defn all
   [account]
   (template/base "Home"
                  [:div {:id "content"}
@@ -15,9 +15,9 @@
                                 "ona.dataset.init(\"%s\", \"%s\");"
                                 (:username account) (:temp_token account)))))
 
-(defn dataview
+(defn show
   [account dataset-id]
-  (template/base "Home"
+  (template/base "Dataset"
                  [:div {:id "content"}
                   [:div {:id "dataset-view"}
                    (loading-spinner {:class "fullpage-spinner"} "Loading Data...")]]
