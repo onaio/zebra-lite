@@ -5,7 +5,8 @@
 
 (def forms-state
   (atom {:forms []
-         :active-forms []}))
+         :active-forms []
+         :username []}))
 
 ;; State manipulation utilities
 
