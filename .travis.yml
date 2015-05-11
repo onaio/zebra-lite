@@ -1,0 +1,16 @@
+lein: lein2
+language: clojure
+script:
+    - lein2 midje
+    - lein2 cljx
+    - lein2 cljsbuild test
+notifications:
+  email:
+    - tech+travis@ona.io
+  slack:
+      webhook_url: 'https://hooks.slack.com/services/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'
+      username: 'travis'
+      channel: '#tech-logs'
+      on_started: false
+      on_success: true
+      on_failure: true

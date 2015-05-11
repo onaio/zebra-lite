@@ -20,8 +20,7 @@
             ;; Hatti views; need to also include all namespaces where methods are defined
             [hatti.views :refer [tabbed-dataview dataview-actions]]
             [hatti.views.dataview]
-            [ona.dataview.details]
-            [ona.dataview.single-submission]))
+            [ona.dataview.details]))
 
 ;;; CONFIG data that should sit at "client", not "library" level
 
