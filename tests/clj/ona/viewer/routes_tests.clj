@@ -1,11 +1,13 @@
 (ns ona.viewer.routes_tests
   (:require [midje.sweet :refer :all]
             [ona.viewer.routes :refer :all]
-            [ona.viewer.views.accounts :as accounts]))
+            [ona.viewer.views.accounts :as accounts]
+            [ona.viewer.views.datasets :as datasets]))
 
 (def username "username")
 (def session {:account :fake-account})
 (def result {:body :something})
+(def dataset-id "1")
 
 (defn- route-params
   "Make route params"
@@ -54,3 +56,11 @@
                                         session)) => (contains result)
              (provided
                (accounts/logout :fake-account) => result)))
+
+(facts "dataset-routes"
+       (fact "GET /forms/:dataset-id calls dataview"
+             (dataset-routes (route-params :get
+                                           (str "/forms/" dataset-id)
+                                           session)) => (contains result)
+             (provided
+               (datasets/dataview :fake-account dataset-id) => result)))
