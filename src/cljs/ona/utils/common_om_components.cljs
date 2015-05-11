@@ -9,7 +9,7 @@
             [ona.utils.dom :as dom-utils]
             [ona.utils.permissions :as p]
             [ona.utils.shared-dom :as shared-dom]
-            [ona.utils.string :refer [not-empty?]]
+            [ona.utils.string :refer [first-cap not-empty?]]
             [ona.utils.tags :refer [image]]
             [sablono.core :refer-macros [html]]))
 
@@ -44,12 +44,11 @@
               [:ul {:class "right" :id "user"}
                [:li {:class "header-user"} [:span {:class "bell-wrap"} [:i {:class "fa fa-bell-o"}]]
                 [:div {:class "dropdown drop-hover"}
-                 [:a {:id "user-avatar" :href "#"} [:span {:class "label label-initial pink"} "G "]
+                 [:a {:id "user-avatar" :href "#"} [:span {:class "label label-initial orange"} (first-cap username)]
                   [:i {:class "fa fa-angle-down"}]]
                  [:ul {:class "submenu" :id "user-dropdown"}
-                  [:li [:a {:href "#"} username]]
-                  [:li [:a {:href "#"} "Settings"]]
-                  [:li [:a {:href "#"} "Help"]]
+                  [:li [:a {:href (str "https://beta.ona.io/" username)
+                            :target "_blank"} username]]
                   [:li [:a {:href "/logout"} "Logout"]]]]]]
               [:ul {:class "right" :id "user"}
                [:li
