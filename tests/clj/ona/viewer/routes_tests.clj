@@ -19,11 +19,13 @@
 (facts "user-routes"
   (fact "GET /temp-token should calls get-token"
     (user-routes (route-params :get
-                               (str "/" username "/temp-token"))) => (contains result)
+                               (str "/" username "/temp-token")
+                               session)) => (contains result)
     (provided
       (accounts/get-token :fake-account username) => result))
   (fact "GET /validate-token calls validate-token"
      (user-routes (route-params :get
-                                (str "/" username "/validate-token"))) => (contains result)
+                                (str "/" username "/validate-token")
+                                session)) => (contains result)
      (provided
        (accounts/validate-token :fake-account username) => result)))
