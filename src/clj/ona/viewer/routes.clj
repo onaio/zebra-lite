@@ -34,7 +34,7 @@
   (GET "/" {{:keys [account]} :session} (home/dashboard account))
   (GET "/about" [] (defaults/about-page))
   (route/resources "/")
-  (route/not-found "Page not found"))
+  (route/not-found (defaults/not-found)))
 
 (defroutes app-routes
   user-routes
