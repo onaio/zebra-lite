@@ -1,0 +1,13 @@
+lein: lein2
+language: clojure
+script:
+    - lein2 midje
+    - lein2 cljx
+    - lein2 cljsbuild test
+notifications:
+  email:
+    - tech+travis@ona.io
+  hipchat:
+    rooms:
+      secure: cfWcsNSVAq9vs0pFrT5VKrd7Be6uE8eDPuaOBVT+sGjRKoF7UgaY+jwHK6yaO+Iv+/4aBEsMb5Sc0qp0vQ7vwP9X9THO4Y+giFolQByKO74rnMEp/cn5Hdyv8r5UsHXLYj4MtipLAuD9wkZBOWjsbYfhhDZ6zJ7ZFztvYn/Fxoc=
+  irc: 'irc.freenode.org#onatest'
