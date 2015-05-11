@@ -9,7 +9,7 @@ notifications:
     - tech+travis@ona.io
   slack:
       webhook_url: 'https://hooks.slack.com/services/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'
-      username: 'drone'
+      username: 'travis'
       channel: '#tech-logs'
       on_started: false
       on_success: true
