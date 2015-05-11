@@ -9,8 +9,8 @@
   (template/base "Home"
                  [:div {:id "content"}
                   [:div {:id "main-menu"}]
-                   [:div {:id "dataset-container"}
-                    (loading-spinner {:class "fullpage-spinner"} "Loading Forms...")]]
+                  [:div {:id "dataset-container"}
+                   (loading-spinner {:class "fullpage-spinner"} "Loading Forms...")]]
                  (tags/js-tag (format
                                 "ona.dataset.init(\"%s\", \"%s\");"
                                 (:username account) (:temp_token account)))))
@@ -19,7 +19,8 @@
   [account dataset-id]
   (template/base "Dataset"
                  [:div {:id "content"}
-                  [:div {:id "dataset-view"}
+                  [:div {:id "main-menu"}]
+                  [:div {:id "dataset-view" :class "container-wide"}
                    (loading-spinner {:class "fullpage-spinner"} "Loading Data...")]]
                  (include-js "/js/vendor/google_maps.3.2.js")
                  (include-js "/js/vendor/leaflet-google.js")
