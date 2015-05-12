@@ -7,7 +7,7 @@
             [om.core :as om :include-macros true]
             [ona.api.io :as io]
             [ona.api.http :refer [parse-http]]
-            [ona.state :refer [update-form-state! forms-state]]
+            [ona.state :refer [forms-state transact-app-state! update-form-state!]]
             [ona.utils.common-om-components :refer [main-menu]]
             [ona.utils.dom :refer [click-fn]]
             [ona.utils.interop :refer [safe-regex]]
@@ -189,11 +189,12 @@
   (update-form-state! forms)
   forms-state)
 
-
 (defn ^:export init [username auth-token]
-  (om/root main-menu {:username username}
+  ;;Add username to app-state
+  (transact-app-state! forms-state [:username] #(identity username))
+  ;;Render main menu
+  (om/root main-menu forms-state
            {:target (. js/document (getElementById menu))})
-
   (go (let [valid-token (<! (io/validate-token auth-token username))
             forms-url (io/make-url "forms.json")
             ;; Find out why the login pop comes up
@@ -203,7 +204,7 @@
             shared-state {:username username
                           :auth-token valid-token
                           :event-chan (chan)}]
+        ;;Render form list
         (om/root datalist-page app-state
                  {:target (. js/document (getElementById dataset-container))
                   :shared shared-state}))))
-

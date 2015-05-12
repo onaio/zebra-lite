@@ -1,6 +1,7 @@
 (ns test-runner
   (:require
    [cljs.test :as test :refer-macros [run-tests] :refer [report]]
+   [ona.utils.common-om-components-test]
    [ona.dataset-tests]))
 
 
@@ -14,8 +15,9 @@
 
 (defn runner []
   (if (cljs.test/successful?
-       (run-tests
-        (test/empty-env ::test/default)
-        'ona.dataset-tests))
+        (run-tests
+          (test/empty-env ::test/default)
+          'ona.utils.common-om-components-test
+          'ona.dataset-tests))
     0
     1))

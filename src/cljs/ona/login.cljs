@@ -6,8 +6,7 @@
            [om.core :as om :include-macros true]
            [ona.utils.common-om-components :refer [main-menu]]
            [ona.utils.dom :refer [click-fn]]
-           [sablono.core :refer-macros [html]]
-           [secretary.core :as secretary]))
+           [sablono.core :refer-macros [html]]))
 
 (def app-state (atom {}))
 

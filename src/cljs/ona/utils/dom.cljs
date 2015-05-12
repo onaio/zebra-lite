@@ -37,7 +37,7 @@
               (dommy/hide! list-item))))))))
 
 (defn init-dropdowns
-  []
+  [div-class-name span-class-name]
   (doseq [dropdown (sel :.dropdown.drop-click)]
     (dommy/listen!
       dropdown :click
@@ -59,8 +59,7 @@
                                              dropdivs))]
         (when-not dropdown-click? (hide-open-submenus)))))
 
-  (init-search-dropdown :.orgs-search :.org-name)
-  (init-search-dropdown :.proj-search :.proj-name))
+  (init-search-dropdown div-class-name span-class-name))
 
 (defn new-container!
   "Returns a new div in the DOM, mostly used for rendering om components into.

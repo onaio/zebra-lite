@@ -7,53 +7,72 @@
             [om.core :as om :include-macros true]
             [ona.api.io :as io]
             [ona.utils.dom :as dom-utils]
-            [ona.utils.permissions :as p]
             [ona.utils.shared-dom :as shared-dom]
-            [ona.utils.string :refer [not-empty?]]
+            [ona.utils.string :refer [first-cap not-empty?]]
             [ona.utils.tags :refer [image]]
+            [ona.utils.url :refer [last-url-param]]
             [sablono.core :refer-macros [html]]))
 
 (defn main-menu
   "Component that renders main-menu"
-  [{:keys [username]} owner]
-  (om/component
-    (html [:div {:id "main-menu" :class "cfix"}
-           [:div {:class "vw-menu pure-menu-horizontal container cfix"}
-            [:a {:id "logo-link" :href "#" :class "pure-menu-heading left"}
-             [:span
-              [:img {:id "ona-logo" :src (image "onadata-logo.png") :alt "ONA"}]]]
-            (if (and (not= username "null") (not-empty? username))
-              [:ul {:class "left" :id "main-nav-links"}
-               [:li
-                [:a {:id "home-link" :href "#"}
-                 [:span "Home"]]]
-               [:li {:id "forms"}
-                [:div {:class "dropdown projects-drop drop-hover"}
-                 [:a {:href "#"}
-                  [:span "Forms "
-                   [:i {:class "fa fa-angle-down"}]]]
-                 [:ul {:id "project-dropdown" :class "submenu"}
-                  [:li [:div {:class "drop-search forms-search"}
-                        [:i {:class"fa fa-search"}]
-                        [:input {:type "text" :name "" :class "" :id "" :placeholder "Find a project"}]]]
-                  [:li [:a {:href "#"} [:span {:class "label label-initial pink"}"A"] [:span {:class "form-name"} "Form 1"]]]
-                  [:li [:a {:href "#"} [:span {:class "label label-initial pink"}"B"] [:span {:class "form-name"} "Form 2"]]]]]]]
-              [:ul {:class "left"}
-               [:li [:a {:class "btn-nav" :href "/join"} "Join Ona"]]])
-            (if (and (not= username "null") (not-empty? username))
-              [:ul {:class "right" :id "user"}
-               [:li {:class "header-user"} [:span {:class "bell-wrap"} [:i {:class "fa fa-bell-o"}]]
-                [:div {:class "dropdown drop-hover"}
-                 [:a {:id "user-avatar" :href "#"} [:span {:class "label label-initial pink"} "G "]
-                  [:i {:class "fa fa-angle-down"}]]
-                 [:ul {:class "submenu" :id "user-dropdown"}
-                  [:li [:a {:href "#"} username]]
-                  [:li [:a {:href "#"} "Settings"]]
-                  [:li [:a {:href "#"} "Help"]]
-                  [:li [:a {:href "/logout"} "Logout"]]]]]]
-              [:ul {:class "right" :id "user"}
-               [:li
-                [:a {:href "/login"} "Sign In"]]])]])))
+  [{:keys [username forms dataset-info]} owner]
+  (reify
+    om/IDidMount
+    (did-mount [_]
+      (dom-utils/init-dropdowns :.forms-search :.form-name))
+    om/IRenderState
+    (render-state [_ state]
+      (let [username (if username
+                       username
+                       (om/get-shared owner [:username]))
+            {:keys [title owner formid] } dataset-info
+            form-owner (last-url-param owner)]
+        (html [:div {:id (if forms
+                           "main-menu"
+                           "dataview-menu") :class "cfix"}
+               [:div {:class "vw-menu pure-menu-horizontal container cfix"}
+                [:a {:id "logo-link" :href "/" :class "pure-menu-heading left"}
+                 [:span
+                  [:img {:id "ona-logo" :src (image "onadata-logo.png") :alt "ONA"}]]]
+                (if (and (not= username "null") (not-empty? username))
+                  (if forms
+                    [:ul {:class "left" :id "main-nav-links"}
+                     [:li
+                      [:a {:id "home-link" :href "/"}
+                       [:span "Home"]]]
+                     [:li {:id "forms"}
+                      [:div {:class "dropdown projects-drop drop-hover"}
+                       [:a {:href "/"}
+                        [:span "Forms "
+                         [:i {:class "fa fa-angle-down"}]]]
+                       [:ul {:id "project-dropdown" :class "submenu"}
+                        [:li [:div {:class "drop-search forms-search"}
+                              [:i {:class"fa fa-search"}]
+                              [:input {:type "text" :name "" :class "" :id "" :placeholder "Find a form"}]]]
+                        (for [{:keys [formid title]} forms]
+                          [:li [:a {:href (str "/forms/" formid)} [:span {:class "pager-icon-red num-datasets-pager"}]
+                                [:span {:class "form-name"} title]]])]]]]
+                    [:div {:class "pure-u-3-4 project-breadcrumb"}
+                     [:a {:href (str "https://beta.ona.io/" form-owner) :class "tooltip" :id "user-label-link" :target "_blank"}
+                      [:span {:class "orange username label user"  :id "user-label"} (first-cap form-owner)]
+                      [:span {:id "form-owner"} form-owner]]
+                     [:i {:class "fa fa-play"}]
+                     [:a {:title title  :href (str "/forms/" formid) :id "dataset-link"} title]])
+                  [:ul {:class "left"}
+                   [:li [:a {:class "btn-nav" :href "/join"} "Join Ona"]]])
+                (if (and (not= username "null") (not-empty? username))
+                  [:ul {:class "right" :id "user"}
+                   [:li {:class "header-user"} [:span {:class "bell-wrap"} [:i {:class "fa fa-bell-o"}]]
+                    [:div {:class "dropdown drop-hover"}
+                     [:a {:id "user-avatar" :href "#"} [:span {:class "label label-initial orange"} (first-cap username)]
+                      [:i {:class "fa fa-angle-down"}]]
+                     [:ul {:class "submenu" :id "user-dropdown"}
+                      [:li [:a {:href (str "https://beta.ona.io/" username)
+                                :target "_blank"} username]]
+                      [:li [:a {:href "/logout"} "Logout"]]]]]]
+                  [:ul {:class "right" :id "user"}
+                   [:li
+                    [:a {:href "/login"} "Sign In"]]])]])))))
 
 
 ;; MARKER HELPERS
@@ -154,20 +173,18 @@
     (init-state [_] {:data-entry-link nil})
     om/IWillMount
     (will-mount [_]
-      (when (p/can-add-data? role)
-        (go (let [link (-> (io/make-url "forms" dataset-id "enketo.json")
-                           (io/get-url {} auth-token)
-                           <! :body :enketo_url)]
-              (om/set-state! owner :data-entry-link link)
-              (when link-cb (link-cb link))))))
+      (go (let [link (-> (io/make-url "forms" dataset-id "enketo.json")
+                         (io/get-url {} auth-token)
+                         <! :body :enketo_url)]
+            (om/set-state! owner :data-entry-link link)
+            (when link-cb (link-cb link)))))
     om/IRenderState
     (render-state [_ {:keys [data-entry-link]}]
       (html
-        (when (p/can-add-data? role)
-          [:a {:target "_blank"
-               :href (str "/webform?url="
-                          (js/encodeURIComponent data-entry-link))}
-           [:span {:class "icon-data submission"}]])))))
+        [:a {:target "_blank"
+             :href (str "/webform?url="
+                        (js/encodeURIComponent data-entry-link))}
+         [:span {:class "icon-data submission"}]]))))
 
 (defn- file-input [name filetype on-change]
   (let [i (.createElement js/document "input")]

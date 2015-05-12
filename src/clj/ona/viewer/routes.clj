@@ -28,13 +28,13 @@
   (GET "/forms/:dataset-id"
        {{:keys [account]} :session
         {:keys [dataset-id]} :params}
-       (datasets/dataview account dataset-id)))
+       (datasets/show account dataset-id)))
 
 (defroutes main-routes
   (GET "/" {{:keys [account]} :session} (home/dashboard account))
   (GET "/about" [] (defaults/about-page))
   (route/resources "/")
-  (route/not-found "Page not found"))
+  (route/not-found (defaults/not-found)))
 
 (defroutes app-routes
   user-routes

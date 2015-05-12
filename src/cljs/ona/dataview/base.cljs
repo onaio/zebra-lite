@@ -137,6 +137,11 @@
 (defn init-views
   [data-atom delete-record! role chart-get shared-state]
   "Render the map, chart and table views."
+  ;;Render main menu
+  (om/root common/main-menu data-atom
+           {:shared shared-state
+            :target (domutils/by-id "main-menu")})
+  ;;Render the map, chart and table views.
   (om/root tabbed-dataview
            data-atom
            {:shared shared-state
