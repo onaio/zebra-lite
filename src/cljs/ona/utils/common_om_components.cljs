@@ -7,7 +7,6 @@
             [om.core :as om :include-macros true]
             [ona.api.io :as io]
             [ona.utils.dom :as dom-utils]
-            [ona.utils.permissions :as p]
             [ona.utils.shared-dom :as shared-dom]
             [ona.utils.string :refer [first-cap not-empty?]]
             [ona.utils.tags :refer [image]]
@@ -174,20 +173,18 @@
     (init-state [_] {:data-entry-link nil})
     om/IWillMount
     (will-mount [_]
-      (when (p/can-add-data? role)
-        (go (let [link (-> (io/make-url "forms" dataset-id "enketo.json")
-                           (io/get-url {} auth-token)
-                           <! :body :enketo_url)]
-              (om/set-state! owner :data-entry-link link)
-              (when link-cb (link-cb link))))))
+      (go (let [link (-> (io/make-url "forms" dataset-id "enketo.json")
+                         (io/get-url {} auth-token)
+                         <! :body :enketo_url)]
+            (om/set-state! owner :data-entry-link link)
+            (when link-cb (link-cb link)))))
     om/IRenderState
     (render-state [_ {:keys [data-entry-link]}]
       (html
-        (when (p/can-add-data? role)
-          [:a {:target "_blank"
-               :href (str "/webform?url="
-                          (js/encodeURIComponent data-entry-link))}
-           [:span {:class "icon-data submission"}]])))))
+        [:a {:target "_blank"
+             :href (str "/webform?url="
+                        (js/encodeURIComponent data-entry-link))}
+         [:span {:class "icon-data submission"}]]))))
 
 (defn- file-input [name filetype on-change]
   (let [i (.createElement js/document "input")]

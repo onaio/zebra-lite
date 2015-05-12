@@ -19,19 +19,6 @@
 
 ;; TESTS
 
-(deftest add-submission-renders-based-on-role
-         (let [roles [p/anonymous p/readonly p/dataentry p/editor p/manager p/owner]
-               containers (zipmap roles
-                                  (map (partial add-submission-container "1") roles))]
-           (testing "owner, manager, data-entry roles => button rendered"
-                    (is (-> (containers p/owner) (sel1 [:span.submission])))
-                    (is (-> (containers p/manager) (sel1 [:span.submission])))
-                    (is (-> (containers p/editor) (sel1 [:span.submission])))
-                    (is (-> (containers p/dataentry) (sel1 [:span.submission]))))
-           (testing "anonymous role => empty button"
-                    (is (not (-> (containers p/readonly) (sel1 [:span.submission]))))
-                    (is (not (-> (containers p/anonymous) (sel1 [:span.submission])))))))
-
 (deftest iframe-tests
          (let [src (gensym)
                c (dom-utils/new-container!)
