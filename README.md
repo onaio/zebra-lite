@@ -1,13 +1,18 @@
+
+[![Build Status](https://travis-ci.org/onaio/zebra-lite.svg?branch=master)](https://travis-ci.org/onaio/zebra-lite)
+
+
 # zebra-lite
-A lite Zebra (i.e. a baby Zebra)
+
+![zebra](https://camo.githubusercontent.com/4227308e3e537c2db6c1ed0f92c3290a88e74985/68747470733a2f2f692e696d6775722e636f6d2f7a776b7475374d2e706e67)
 
 ## Overview
-This is a light version of Zebra enabling users to access their forms and submissions through the Ona API. They will not be able to access projects and organisations from this version.
+This is a light version of Zebra that allows users to log into their accounts, view their forms, and view the data in their forms. It uses the Clojure(Script) Ona client [milia](https://github.com/onaio/milia) to connect to the [Ona API](http://ona.io/api/). It connections to [Ona Production](http://ona.io/) by default but can be [configured](https://github.com/onaio/zebra-lite#configuration) to connect to any server running Ona or an Ona-compatible API.
 
 ## Component Architecture
 + Login
 + Forms View
-+ Submission View
++ Submission View (using [hatti](https://github.com/onaio/hatti))
     * table-page
     * map-page
     * chart-page
