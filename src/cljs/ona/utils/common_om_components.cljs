@@ -53,7 +53,7 @@
                           [:li [:a {:href (str "/forms/" formid)} [:span {:class "pager-icon-red num-datasets-pager"}]
                                 [:span {:class "form-name"} title]]])]]]]
                     [:div {:class "pure-u-3-4 project-breadcrumb"}
-                     [:a {:href (str "https://beta.ona.io/" form-owner) :class "tooltip" :id "user-label-link" :target "_blank"}
+                     [:a {:href "/" :class "tooltip" :id "user-label-link"}
                       [:span {:class "orange username label user"  :id "user-label"} (first-cap form-owner)]
                       [:span {:id "form-owner"} form-owner]]
                      [:i {:class "fa fa-play"}]
@@ -67,8 +67,7 @@
                      [:a {:id "user-avatar" :href "#"} [:span {:class "label label-initial orange"} (first-cap username)]
                       [:i {:class "fa fa-angle-down"}]]
                      [:ul {:class "submenu" :id "user-dropdown"}
-                      [:li [:a {:href (str "https://beta.ona.io/" username)
-                                :target "_blank"} username]]
+                      [:li [:a {:href "/"} username]]
                       [:li [:a {:href "/logout"} "Logout"]]]]]]
                   [:ul {:class "right" :id "user"}
                    [:li
