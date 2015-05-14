@@ -4,8 +4,8 @@
   (:require [cljs.core.async :refer [<! chan mult tap put! timeout]]
             [om.core :as om :include-macros true]
             [hatti.shared :refer [app-state event-chan] :as hatti-shared]
-            [ona.api.io :as io]
-            [ona.api.async-export :as export-api]
+            [milia.api.io :as io]
+            [milia.api.async-export :as export-api]
             [ona.utils.interop :refer [json->cljs]]))
 
 (def default-fields

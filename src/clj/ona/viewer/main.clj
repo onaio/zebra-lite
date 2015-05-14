@@ -2,7 +2,7 @@
   (:require [ona.viewer.routes :as routes]
             [environ.core :refer [env]]
             [onelog.core :as log]
-            [ona.utils.remote :refer [hosts]]
+            [milia.utils.remote :refer [hosts]]
             [ring.adapter.jetty :as ring])
   (:gen-class))
 

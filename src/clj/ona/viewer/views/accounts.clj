@@ -1,9 +1,9 @@
 (ns ona.viewer.views.accounts
-  (:require [ona.api.user :as user]
+  (:require [milia.api.user :as user]
             [ona.utils.shared-dom :refer [loading-spinner]]
             [ona.utils.tags :as tags]
             [ona.viewer.helpers.accounts :refer [build-session get-account-credentials]]
-            [ona.api.user :as user-api]
+            [milia.api.user :as user-api]
             [ona.viewer.views.template :as template]
             [ring.util.response :as response]))
 

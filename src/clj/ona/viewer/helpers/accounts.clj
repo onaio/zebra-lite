@@ -1,5 +1,5 @@
 (ns ona.viewer.helpers.accounts
-  (:require [ona.api.user :refer [user profile]]))
+  (:require [milia.api.user :refer [user profile]]))
 
 (defn get-account-credentials
   "Create an account map given a user's credentials."

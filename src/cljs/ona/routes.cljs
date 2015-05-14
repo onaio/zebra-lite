@@ -1,6 +1,6 @@
 (ns ona.routes
   (:require [secretary.core :as secretary :refer-macros [defroute]]
-            [ona.api.io :as io]))
+            [milia.api.io :as io]))
 
 
 (defroute "/login" {:as params}

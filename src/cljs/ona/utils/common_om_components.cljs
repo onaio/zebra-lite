@@ -5,12 +5,12 @@
             [clojure.string :as s]
             [dommy.core :as dommy]
             [om.core :as om :include-macros true]
-            [ona.api.io :as io]
+            [milia.api.io :as io]
             [ona.utils.dom :as dom-utils]
             [ona.utils.shared-dom :as shared-dom]
             [ona.utils.string :refer [first-cap not-empty?]]
             [ona.utils.tags :refer [image]]
-            [ona.utils.url :refer [last-url-param]]
+            [milia.utils.url :refer [last-url-param]]
             [sablono.core :refer-macros [html]]))
 
 (defn main-menu

@@ -3,10 +3,10 @@
             [clojure.string :as string]
             [ona.viewer.views.accounts :refer :all]
             [ona.viewer.helpers.accounts :refer [get-account-credentials]]
-            [ona.api.user :as user-api]
-            [ona.api.http :refer [parse-http]]
-            [ona.api.io :refer [make-url]]
-            [ona.utils.remote :refer [protocol]]))
+            [milia.api.user :as user-api]
+            [milia.api.http :refer [parse-http]]
+            [milia.api.io :refer [make-url]]
+            [milia.utils.remote :refer [protocol]]))
 
 
 (def username "testusername")
