@@ -66,7 +66,9 @@
                              :jetty-min-threads 10
                              :jetty-max-threads 80
                              :ona-api-server-host "ona.io"
-                             :ona-api-server-protocol "https"}
+                             :ona-api-server-protocol "https"
+                             :stdout "/dev/stdout"
+                             :file "/var/log/ona-viewer/current"}
                        :aot :all}}
 
   :prep-tasks [["cljx" "once"] "javac" "compile"]
